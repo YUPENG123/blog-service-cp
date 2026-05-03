@@ -4,8 +4,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-programming-tour-book/blog-service/pkg/app"
-	"github.com/go-programming-tour-book/blog-service/pkg/errcode"
+	"github.com/YUPENG123/blog-service-cp/pkg/app"
+	"github.com/YUPENG123/blog-service-cp/pkg/errcode"
 )
 
 func JWT() gin.HandlerFunc {

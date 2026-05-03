@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/YUPENG123/blog-service-cp/global"
+	"github.com/YUPENG123/blog-service-cp/pkg/setting"
 	otgorm "github.com/eddycjy/opentracing-gorm"
-	"github.com/go-programming-tour-book/blog-service/global"
-	"github.com/go-programming-tour-book/blog-service/pkg/setting"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 const (
@@ -27,15 +28,25 @@ type Model struct {
 }
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
-	s := "%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local"
-	db, err := gorm.Open(databaseSetting.DBType, fmt.Sprintf(s,
-		databaseSetting.UserName,
-		databaseSetting.Password,
-		databaseSetting.Host,
-		databaseSetting.DBName,
-		databaseSetting.Charset,
-		databaseSetting.ParseTime,
-	))
+	var (
+		db  *gorm.DB
+		err error
+	)
+	if databaseSetting.DBType == "sqlite3" {
+		// SQLite 只需要数据库文件路径
+		db, err = gorm.Open(databaseSetting.DBType, databaseSetting.DBName)
+	} else {
+		// 原有的 MySQL 逻辑
+		s := "%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local"
+		db, err = gorm.Open(databaseSetting.DBType, fmt.Sprintf(s,
+			databaseSetting.UserName,
+			databaseSetting.Password,
+			databaseSetting.Host,
+			databaseSetting.DBName,
+			databaseSetting.Charset,
+			databaseSetting.ParseTime,
+		))
+	}
 	if err != nil {
 		return nil, err
 	}

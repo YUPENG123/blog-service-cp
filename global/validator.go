@@ -1,7 +1,7 @@
 package global
 
 import (
-	"github.com/go-programming-tour-book/blog-service/pkg/validator"
+	"github.com/YUPENG123/blog-service-cp/pkg/validator"
 )
 
 var (

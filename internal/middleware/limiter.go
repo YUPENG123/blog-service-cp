@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/go-programming-tour-book/blog-service/pkg/app"
-	"github.com/go-programming-tour-book/blog-service/pkg/errcode"
-	"github.com/go-programming-tour-book/blog-service/pkg/limiter"
+	"github.com/YUPENG123/blog-service-cp/pkg/app"
+	"github.com/YUPENG123/blog-service-cp/pkg/errcode"
+	"github.com/YUPENG123/blog-service-cp/pkg/limiter"
 )
 
 func RateLimiter(l limiter.LimiterIface) gin.HandlerFunc {

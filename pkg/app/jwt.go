@@ -3,10 +3,10 @@ package app
 import (
 	"time"
 
-	"github.com/go-programming-tour-book/blog-service/pkg/util"
+	"github.com/YUPENG123/blog-service-cp/pkg/util"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/go-programming-tour-book/blog-service/global"
+	"github.com/YUPENG123/blog-service-cp/global"
 )
 
 type Claims struct {

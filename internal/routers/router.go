@@ -4,15 +4,15 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-programming-tour-book/blog-service/pkg/limiter"
+	"github.com/YUPENG123/blog-service-cp/pkg/limiter"
 
-	"github.com/go-programming-tour-book/blog-service/global"
+	"github.com/YUPENG123/blog-service-cp/global"
 
+	_ "github.com/YUPENG123/blog-service-cp/docs"
+	"github.com/YUPENG123/blog-service-cp/internal/middleware"
+	"github.com/YUPENG123/blog-service-cp/internal/routers/api"
+	"github.com/YUPENG123/blog-service-cp/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-programming-tour-book/blog-service/docs"
-	"github.com/go-programming-tour-book/blog-service/internal/middleware"
-	"github.com/go-programming-tour-book/blog-service/internal/routers/api"
-	"github.com/go-programming-tour-book/blog-service/internal/routers/api/v1"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
@@ -49,6 +49,14 @@ func NewRouter() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 	r.POST("/auth", api.GetAuth)
 	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
+	r.GET("/db-check", func(c *gin.Context) {
+		var tables []string
+		// 原生 SQL 查询 SQLite 的系统表，看看有哪些表存在
+		global.DBEngine.Raw("SELECT name FROM sqlite_master WHERE type='table'").Pluck("name", &tables)
+		c.JSON(200, gin.H{
+			"tables": tables,
+		})
+	})
 	apiv1 := r.Group("/api/v1")
 	apiv1.Use() //middleware.JWT()
 	{

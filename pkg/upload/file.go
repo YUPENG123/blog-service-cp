@@ -8,8 +8,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/go-programming-tour-book/blog-service/global"
-	"github.com/go-programming-tour-book/blog-service/pkg/util"
+	"github.com/YUPENG123/blog-service-cp/global"
+	"github.com/YUPENG123/blog-service-cp/pkg/util"
 )
 
 type FileType int

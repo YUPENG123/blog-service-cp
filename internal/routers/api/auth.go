@@ -2,10 +2,10 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/go-programming-tour-book/blog-service/global"
-	"github.com/go-programming-tour-book/blog-service/internal/service"
-	"github.com/go-programming-tour-book/blog-service/pkg/app"
-	"github.com/go-programming-tour-book/blog-service/pkg/errcode"
+	"github.com/YUPENG123/blog-service-cp/global"
+	"github.com/YUPENG123/blog-service-cp/internal/service"
+	"github.com/YUPENG123/blog-service-cp/pkg/app"
+	"github.com/YUPENG123/blog-service-cp/pkg/errcode"
 )
 
 func GetAuth(c *gin.Context) {

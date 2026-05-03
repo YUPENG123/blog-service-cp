@@ -12,16 +12,16 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-programming-tour-book/blog-service/pkg/tracer"
+	"github.com/YUPENG123/blog-service-cp/pkg/tracer"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/go-programming-tour-book/blog-service/global"
-	"github.com/go-programming-tour-book/blog-service/internal/model"
-	"github.com/go-programming-tour-book/blog-service/internal/routers"
-	"github.com/go-programming-tour-book/blog-service/pkg/logger"
-	"github.com/go-programming-tour-book/blog-service/pkg/setting"
-	"github.com/go-programming-tour-book/blog-service/pkg/validator"
+	"github.com/YUPENG123/blog-service-cp/global"
+	"github.com/YUPENG123/blog-service-cp/internal/model"
+	"github.com/YUPENG123/blog-service-cp/internal/routers"
+	"github.com/YUPENG123/blog-service-cp/pkg/logger"
+	"github.com/YUPENG123/blog-service-cp/pkg/setting"
+	"github.com/YUPENG123/blog-service-cp/pkg/validator"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
@@ -162,6 +162,9 @@ func setupDBEngine() error {
 	if err != nil {
 		return err
 	}
+
+	// 自动迁移表结构
+	global.DBEngine.AutoMigrate(&model.Tag{}, &model.Article{}, &model.ArticleTag{})
 
 	return nil
 }

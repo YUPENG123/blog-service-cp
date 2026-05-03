@@ -6,7 +6,7 @@ import (
 
 	"github.com/opentracing/opentracing-go/ext"
 
-	"github.com/go-programming-tour-book/blog-service/global"
+	"github.com/YUPENG123/blog-service-cp/global"
 	"github.com/uber/jaeger-client-go"
 
 	"github.com/gin-gonic/gin"

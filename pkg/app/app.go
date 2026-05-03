@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-programming-tour-book/blog-service/pkg/errcode"
+	"github.com/YUPENG123/blog-service-cp/pkg/errcode"
 )
 
 type Response struct {
