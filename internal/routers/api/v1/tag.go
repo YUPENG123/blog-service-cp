@@ -1,12 +1,12 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/YUPENG123/blog-service-cp/global"
 	"github.com/YUPENG123/blog-service-cp/internal/service"
 	"github.com/YUPENG123/blog-service-cp/pkg/app"
 	"github.com/YUPENG123/blog-service-cp/pkg/convert"
 	"github.com/YUPENG123/blog-service-cp/pkg/errcode"
+	"github.com/gin-gonic/gin"
 )
 
 type Tag struct{}
@@ -56,9 +56,7 @@ func (t Tag) List(c *gin.Context) {
 
 // @Summary 新增标签
 // @Produce  json
-// @Param name body string true "标签名称" minlength(3) maxlength(100)
-// @Param state body int false "状态" Enums(0, 1) default(1)
-// @Param created_by body string false "创建者" minlength(3) maxlength(100)
+// @Param body body service.CreateTagRequest true "新增标签"
 // @Success 200 {object} model.Tag "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"

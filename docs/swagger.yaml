@@ -12,18 +12,6 @@ definitions:
         type: integer
     type: object
   errcode.Error:
-    properties:
-      code:
-        description: 错误码
-        type: integer
-      details:
-        description: 详细信息
-        items:
-          type: string
-        type: array
-      msg:
-        description: 错误消息
-        type: string
     type: object
   model.Article:
     properties:
@@ -60,7 +48,6 @@ definitions:
         type: array
       pager:
         $ref: '#/definitions/app.Pager'
-        type: object
     type: object
   model.Tag:
     properties:
@@ -91,12 +78,29 @@ definitions:
         type: array
       pager:
         $ref: '#/definitions/app.Pager'
-        type: object
+    type: object
+  service.CreateTagRequest:
+    properties:
+      created_by:
+        maxLength: 100
+        minLength: 2
+        type: string
+      name:
+        maxLength: 100
+        minLength: 2
+        type: string
+      state:
+        enum:
+        - 0
+        - 1
+        type: integer
+    required:
+    - created_by
+    - name
     type: object
 info:
   contact: {}
-  description: Go 编程之旅：一起用 Go 做项目
-  license: {}
+  description: Go 语言编程之旅：一起用 Go 做项目
   termsOfService: https://github.com/go-programming-tour-book
   title: 博客系统
   version: "1.0"
@@ -336,30 +340,12 @@ paths:
       summary: 获取多个标签
     post:
       parameters:
-      - description: 标签名称
+      - description: 新增标签
         in: body
-        maxLength: 100
-        minLength: 3
-        name: name
+        name: body
         required: true
         schema:
-          type: string
-      - default: 1
-        description: 状态
-        enum:
-        - 0
-        - 1
-        in: body
-        name: state
-        schema:
-          type: integer
-      - description: 创建者
-        in: body
-        maxLength: 100
-        minLength: 3
-        name: created_by
-        schema:
-          type: string
+          $ref: '#/definitions/service.CreateTagRequest'
       produces:
       - application/json
       responses:
@@ -416,12 +402,12 @@ paths:
           type: string
       - default: 1
         description: 状态
-        enum:
-        - 0
-        - 1
         in: body
         name: state
         schema:
+          enum:
+          - 0
+          - 1
           type: integer
       - description: 修改者
         in: body

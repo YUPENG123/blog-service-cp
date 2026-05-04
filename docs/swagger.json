@@ -1,11 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Go 编程之旅：一起用 Go 做项目",
+        "description": "Go 语言编程之旅：一起用 Go 做项目",
         "title": "博客系统",
         "termsOfService": "https://github.com/go-programming-tour-book",
         "contact": {},
-        "license": {},
         "version": "1.0"
     },
     "paths": {
@@ -373,37 +372,12 @@
                 "summary": "新增标签",
                 "parameters": [
                     {
-                        "maxLength": 100,
-                        "minLength": 3,
-                        "description": "标签名称",
-                        "name": "name",
+                        "description": "新增标签",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "enum": [
-                            0,
-                            1
-                        ],
-                        "default": 1,
-                        "description": "状态",
-                        "name": "state",
-                        "in": "body",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "maxLength": 100,
-                        "minLength": 3,
-                        "description": "创建者",
-                        "name": "created_by",
-                        "in": "body",
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/service.CreateTagRequest"
                         }
                     }
                 ],
@@ -454,16 +428,16 @@
                         }
                     },
                     {
-                        "enum": [
-                            0,
-                            1
-                        ],
                         "default": 1,
                         "description": "状态",
                         "name": "state",
                         "in": "body",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
                         }
                     },
                     {
@@ -558,24 +532,7 @@
             }
         },
         "errcode.Error": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "错误码",
-                    "type": "integer"
-                },
-                "details": {
-                    "description": "详细信息",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "msg": {
-                    "description": "错误消息",
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "model.Article": {
             "type": "object",
@@ -628,7 +585,6 @@
                     }
                 },
                 "pager": {
-                    "type": "object",
                     "$ref": "#/definitions/app.Pager"
                 }
             }
@@ -675,8 +631,33 @@
                     }
                 },
                 "pager": {
-                    "type": "object",
                     "$ref": "#/definitions/app.Pager"
+                }
+            }
+        },
+        "service.CreateTagRequest": {
+            "type": "object",
+            "required": [
+                "created_by",
+                "name"
+            ],
+            "properties": {
+                "created_by": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "state": {
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
                 }
             }
         }
